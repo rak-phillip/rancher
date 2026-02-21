@@ -15,12 +15,19 @@ var (
 )
 
 const primeEnv = "RANCHER_VERSION_TYPE"
+const versionDev = "RANCHER_VERSION_DEV"
 
 // Info encapsulates version metadata.
 type Info struct {
 	Version      string
 	GitCommit    string
 	RancherPrime string
+}
+
+func init() {
+	if v := os.Getenv(versionDev); v != "" {
+		Version = v
+	}
 }
 
 // FriendlyVersion returns a human-readable string that can be included in log output.
